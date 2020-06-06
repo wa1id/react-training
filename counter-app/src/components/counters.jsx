@@ -11,8 +11,8 @@ class Counters extends Component {
     ],
   };
 
-  handleDelete = () => {
-    console.log("delete");
+  handleDelete = (counterId) => {
+    console.log("delete", counterId);
   };
 
   render() {
@@ -22,6 +22,7 @@ class Counters extends Component {
           <Counter
             key={counter.id}
             value={counter.value}
+            id={counter.id}
             onDelete={this.handleDelete}
           />
         ))}
