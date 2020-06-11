@@ -15,7 +15,9 @@ class Movies extends Component {
   };
 
   componentDidMount() {
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    const genres = [{ name: "All Genres" }, ...getGenres()];
+
+    this.setState({ movies: getMovies(), genres: genres });
   }
 
   handleDelete = (movie) => {
@@ -52,9 +54,10 @@ class Movies extends Component {
       return <p>There are no movies.</p>;
     }
 
-    const filtered = selectedGenre
-      ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
-      : allMovies; // als er een genre is geselecteerd, dan allMovies filteren op die genre. Anders, als er geen genre is geselecteerd dan alle movies tonen
+    const filtered =
+      selectedGenre && selectedGenre._id
+        ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
+        : allMovies; // als er een genre is geselecteerd, dan allMovies filteren op die genre. Anders, als er geen genre is geselecteerd dan alle movies tonen
 
     const movies = paginate(filtered, currentPage, pageSize);
 
