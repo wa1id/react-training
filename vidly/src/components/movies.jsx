@@ -41,13 +41,22 @@ class Movies extends Component {
 
   render() {
     const { length: count } = this.state.movies;
-    const { pageSize, currentPage, movies: allMovies } = this.state;
+    const {
+      pageSize,
+      currentPage,
+      selectedGenre,
+      movies: allMovies,
+    } = this.state;
 
     if (count === 0) {
       return <p>There are no movies.</p>;
     }
 
-    const movies = paginate(allMovies, currentPage, pageSize);
+    const filtered = selectedGenre
+      ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
+      : allMovies; // als er een genre is geselecteerd, dan allMovies filteren op die genre. Anders, als er geen genre is geselecteerd dan alle movies tonen
+
+    const movies = paginate(filtered, currentPage, pageSize);
 
     return (
       <div className="row">
@@ -100,7 +109,7 @@ class Movies extends Component {
             </tbody>
           </table>
           <Pagination
-            itemsCount={count}
+            itemsCount={filtered.length}
             pageSize={pageSize}
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
