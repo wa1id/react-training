@@ -16,16 +16,16 @@ class App extends Component {
         <NavBar />
         <div className="content">
           <Switch>
-            <Route path="/products/:id" component={ProductDetails}></Route>
+            <Route path="/products/:id" component={ProductDetails} />
             <Route
               path="/products"
               render={(props) => <Products sortBy="newest" {...props} />}
-            ></Route>
-            <Route path="/posts/:year?/:month?" component={Posts}></Route>
+            />
+            <Route path="/posts/:year?/:month?" component={Posts} />
             <Redirect from="/messages" to="/posts"></Redirect>
-            <Route path="/admin" component={Dashboard}></Route>
-            <Route path="/not-found" component={NotFound}></Route>
-            <Route exact path="/" component={Home}></Route>
+            <Route path="/admin" component={Dashboard} />
+            <Route path="/not-found" component={NotFound} />
+            <Route exact path="/" component={Home} />
             <Redirect to="/not-found"></Redirect>
           </Switch>
         </div>
